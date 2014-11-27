@@ -55,11 +55,12 @@ import org.apache.commons.logging.LogFactory;
 
 
 public class WSProxy extends HttpServlet implements Servlet {
+    private final static String MyLogger= "[Java-Proxy-App]"
     private WSProxyHelper m_objWSProxyHelper;
     private Log log;
     
     public WSProxy() {
-        log = LogFactory.getLog("[WSProxy]");
+        log = LogFactory.getLog(MyLogger);
     }
 
     public void init() throws ServletException {
@@ -107,7 +108,7 @@ public class WSProxy extends HttpServlet implements Servlet {
                 response.sendError(502, "Error");
             } catch(IOException m_objIOException) {
                 log.info("Exception catched setting http status code: " + m_objIOException.getMessage());
-                throw new ServletException("[WSProxy] " + m_objIOException.getMessage());
+                throw new ServletException(MyLogger + " " + m_objIOException.getMessage());
             }
         }
     }
