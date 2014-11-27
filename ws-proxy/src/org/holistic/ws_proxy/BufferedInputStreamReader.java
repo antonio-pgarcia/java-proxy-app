@@ -49,11 +49,12 @@ package org.holistic.ws_proxy;
 
 import java.io.*;
 
-public class BufferedInputStreamReader extends BufferedInputStream
-{
+public class BufferedInputStreamReader extends BufferedInputStream {
+    private int m_iChunkSize;
+    private int m_iCounter;
+    private byte m_buffer[];
 
-    public BufferedInputStreamReader(InputStream objValue, int iValue)
-    {
+    public BufferedInputStreamReader(InputStream objValue, int iValue) {
         super(objValue);
         m_iChunkSize = 0;
         m_iCounter = 0;
@@ -61,35 +62,25 @@ public class BufferedInputStreamReader extends BufferedInputStream
         m_buffer = new byte[get_chunksize()];
     }
 
-    private void set_chunksize(int iValue)
-    {
+    private void set_chunksize(int iValue) {
         m_iChunkSize = iValue;
     }
 
-    private int get_chunksize()
-    {
+    private int get_chunksize() {
         return m_iChunkSize;
     }
 
-    public byte[] nextChunk()
-        throws Exception
-    {
+    public byte[] nextChunk() throws Exception {
         int m_iBytes = 0;
         m_iBytes = read(m_buffer);
         if(m_iBytes == -1)
             return null;
-        if(m_iBytes == m_buffer.length)
-        {
+        if(m_iBytes == m_buffer.length) {
             return m_buffer;
-        } else
-        {
+        } else {
             byte m_baLastChunk[] = new byte[m_iBytes];
             System.arraycopy(m_buffer, 0, m_baLastChunk, 0, m_iBytes);
             return m_baLastChunk;
         }
     }
-
-    private int m_iChunkSize;
-    private int m_iCounter;
-    private byte m_buffer[];
 }
