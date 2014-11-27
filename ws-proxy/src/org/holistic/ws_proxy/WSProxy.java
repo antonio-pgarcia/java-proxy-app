@@ -54,12 +54,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
-public class WSProxy extends HttpServlet implements Servlet {
-    private final static String MyLogger= "[Java-Proxy-App]"
+public class ProxyServlet extends HttpServlet implements Servlet {
+    private final static String MyLogger= "[ProxyServlet]"
     private WSProxyHelper m_objWSProxyHelper;
     private Log log;
     
-    public WSProxy() {
+    public ProxyServlet() {
         log = LogFactory.getLog(MyLogger);
     }
 
